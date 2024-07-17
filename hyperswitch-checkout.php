@@ -626,6 +626,13 @@ function hyperswitch_init_payment_class() {
             }
             $metadata["is_adult"] = $is_adult ? "true" : "false";
 
+            // restrict payment gateways
+            if ($is_adult) {
+                $allowed_gateways = ['authorize'];
+
+                $payload["allowed_payment_method_types"] = $allowed_gateways;
+            }
+
 			if ( $order ) {
 				$metadata["order_num"] = $order_id;
 				$metadata["customer_note"] = $order_note;
