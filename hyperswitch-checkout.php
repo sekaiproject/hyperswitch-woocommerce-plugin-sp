@@ -590,6 +590,27 @@ function hyperswitch_init_payment_class() {
 				"customer_logged_in" => $customer_logged_in ? "true" : "false",
 			);
 
+            // custom meta data for adult items
+            $is_adult = false;
+            $adult_tags = ['r18'];
+            if ($order) {
+                foreach ($order->get_items() as $item) {
+                    if ($is_adult) {
+                        break;
+                    }
+
+                    $tags_str = wc_get_product_tag_list($item->get_product_id());
+                    $tags = explode(',', $tags_str);
+                    foreach ($tags as $tag) {
+                        if (in_array($tag, $adult_tags)) {
+                            $is_adult = true;
+                            break;
+                        }
+                    }
+                }
+            }
+            $metadata["is_adult"] = $is_adult ? "true" : "false";
+
 			if ( $order ) {
 				$metadata["order_num"] = $order_id;
 				$metadata["customer_note"] = $order_note;
