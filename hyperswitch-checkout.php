@@ -607,6 +607,22 @@ function hyperswitch_init_payment_class() {
                         }
                     }
                 }
+            } else {
+                // grab from cart if order is not generated yet
+                $items = $woocommerce->cart->get_cart();
+                foreach ($items as $item) {
+                    if ($is_adult) {
+                        break;
+                    }
+
+                    $tags = get_the_terms($item['product_id'], 'product_tag');
+                    foreach ($tags as $tag) {
+                        if (in_array(mb_strtolower($tag->name), $adult_tags)) {
+                            $is_adult = true;
+                            break;
+                        }
+                    }
+                }
             }
             $metadata["is_adult"] = $is_adult ? "true" : "false";
 
