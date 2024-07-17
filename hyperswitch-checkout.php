@@ -601,8 +601,7 @@ function hyperswitch_init_payment_class() {
 
                     $tags = get_the_terms($item->get_product_id(), 'product_tag');
                     foreach ($tags as $tag) {
-                        $tagName = $tag->name;
-                        if (in_array($tagName, $adult_tags)) {
+                        if (in_array($tag->name, $adult_tags)) {
                             $is_adult = true;
                             break;
                         }
