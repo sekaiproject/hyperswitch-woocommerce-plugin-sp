@@ -628,7 +628,7 @@ function hyperswitch_init_payment_class() {
 
             // restrict payment gateways
             if ($is_adult) {
-                $allowed_gateways = ['authorize'];
+                $allowed_gateways = ['authorize', 'credit', 'debit'];
 
                 $payload["allowed_payment_method_types"] = $allowed_gateways;
             }
