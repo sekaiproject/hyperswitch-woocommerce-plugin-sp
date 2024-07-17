@@ -628,9 +628,9 @@ function hyperswitch_init_payment_class() {
 
             // restrict payment gateways
             if ($is_adult) {
-                $allowed_gateways = ['credit', 'debit'];
+                $allowed_connector = ['fauxpay', 'authorizedotnet'];
 
-                $payload["allowed_payment_method_types"] = $allowed_gateways;
+                $payload["connector"] = $allowed_connector;
             }
 
 			if ( $order ) {
